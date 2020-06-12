@@ -1,16 +1,16 @@
  
-Web uygulaması ASP.Net MVC, DevExtreme verion 20 ve Dapper kullanılarak geliştirdim.
-Arka tarafta Jquery, bootstrap ve ajax kullandım. 
-Bu Web uygulamasında listeleme ve CRUD işlemleri tek bir sayfada gerçekleştirdim.
-DevExtreme' in DataGrid' i listelemede kullanıldı ve bir çok özelliği gride aktardım.
-Örneğin; Sıralama, Arama, Gruplama, Güncelleme, Silme ve Ekleme bu datagrid'in özelliklerinden bazılarıdır.
+Web uygulamasÄ± ASP.Net MVC, DevExtreme verion 20 ve Dapper kullanÄ±larak geliÅŸtirdim.
+Arka tarafta Jquery, bootstrap ve ajax kullandÄ±m. 
+Bu Web uygulamasÄ±nda listeleme ve CRUD iÅŸlemleri tek bir sayfada gerÃ§ekleÅŸtirdim.
+DevExtreme' in DataGrid' i listelemede kullanÄ±ldÄ± ve bir Ã§ok Ã¶zelliÄŸi gride aktardÄ±m.
+Ã–rneÄŸin; SÄ±ralama, Arama, Gruplama, GÃ¼ncelleme, Silme ve Ekleme bu datagrid'in Ã¶zelliklerinden bazÄ±larÄ±dÄ±r.
 
 
-Projede MSSQL Server 2019 kullanıldı. 
+Projede MSSQL Server 2019 kullanÄ±ldÄ±. 
 
 SQL script;
 
-USE [NEFA]
+USE [CARI]
 GO
  
 SET ANSI_NULLS ON
