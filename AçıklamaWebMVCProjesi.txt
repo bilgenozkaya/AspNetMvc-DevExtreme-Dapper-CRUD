@@ -1,0 +1,47 @@
+ 
+Web uygulamasý ASP.Net MVC, DevExtreme verion 20 ve Dapper kullanýlarak geliþtirdim.
+Arka tarafta Jquery, bootstrap ve ajax kullandým. 
+Bu Web uygulamasýnda listeleme ve CRUD iþlemleri tek bir sayfada gerçekleþtirdim.
+DevExtreme' in DataGrid' i listelemede kullanýldý ve bir çok özelliði gride aktardým.
+Örneðin; Sýralama, Arama, Gruplama, Güncelleme, Silme ve Ekleme bu datagrid'in özelliklerinden bazýlarýdýr.
+
+
+Projede MSSQL Server 2019 kullanýldý. 
+
+SQL script;
+
+USE [NEFA]
+GO
+ 
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CARI](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[CARIKOD] [nvarchar](50) NULL,
+	[CARIISIM] [nvarchar](150) NULL,
+	[ADRES] [nvarchar](150) NULL,
+	[IL] [nvarchar](50) NULL,
+	[ILCE] [nvarchar](50) NULL,
+	[ULKEKODU] [nvarchar](50) NULL,
+	[TELEFON] [nvarchar](15) NULL,
+	[FAX] [nvarchar](15) NULL,
+	[VERGIDAIRESI] [nvarchar](50) NULL,
+	[VERGINO] [nvarchar](50) NULL,
+	[TCNO] [nvarchar](11) NULL,
+	[POSTAKODU] [nvarchar](7) NULL,
+	[TIP] [int] NULL,
+	[EMAIL] [nvarchar](100) NULL,
+	[WEBADRESI] [nvarchar](150) NULL,
+ CONSTRAINT [PK_CARI] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+

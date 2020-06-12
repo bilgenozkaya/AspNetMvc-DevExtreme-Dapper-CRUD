@@ -1,0 +1,188 @@
+@using NefaMVCWenAppDevEx.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cari Liste</h2>
+
+<div class="gridContainer">
+@(Html.DevExtreme().DataGrid<DataModel>()
+          .ID("gridContainer")
+          .ShowBorders(true)
+          .DataSource(d => d.WebApi().Controller("ModelData")
+          .LoadAction("Get")
+          .InsertAction("Post")
+          .UpdateAction("Put")
+          .DeleteAction("Delete")
+          .OnBeforeSend("beforeSend")
+          .Key("ID"))
+          .ColumnChooser(cs => cs.Enabled(true))
+          .ColumnFixing(cs=>cs.Enabled(true))
+          .AllowColumnReordering(true)
+          .AllowColumnResizing(true)
+          .ColumnAutoWidth(true)
+          .FocusedRowEnabled(true)  // seçili satýrý renklendirir
+        .Columns(columns =>
+        {
+            //columns.AddFor(m => m.ID).Visible(false);
+            columns.AddFor(m => m.CARIKOD).Caption("Cari Kod").Fixed(true);
+            columns.AddFor(m => m.CARIISIM).Caption("Cari Ýsim");
+            columns.AddFor(m => m.ADRES).Caption("Adres");
+            columns.AddFor(m => m.IL).Caption("Ýl");
+            columns.AddFor(m => m.ILCE).Caption("Ýlçe");
+            columns.AddFor(m => m.ULKEKODU).Caption("Ülke Kodu");
+            columns.AddFor(m => m.TELEFON).Caption("Telefon");
+            columns.AddFor(m => m.FAX).Caption("Fax");
+            columns.AddFor(m => m.TCNO).Caption("TC No");
+            columns.AddFor(m => m.VERGIDAIRESI).Caption("Vergi Dairesi");/*Lookup(l => l.DataSource(d => d.WebApi().Controller("DataGridTipLookup").LoadAction("GetVergiDairesi").Key("ID")).DisplayExpr("AD").ValueExpr("ID"));*/
+            columns.AddFor(m => m.VERGINO).Caption("Vergi No");
+            columns.AddFor(m => m.TIP).Caption("Tip").Lookup(l=>l.DataSource(d=>d.WebApi().Controller("DataGridTipLookup").LoadAction("GetTip").Key("ID")).DisplayExpr("AD").ValueExpr("ID"));
+            columns.AddFor(m => m.EMAIL).Caption("Email");
+            columns.AddFor(m => m.WEBADRESI).Caption("Web Adres");
+        })
+        //.Paging(p => p.PageSize(10)) // dikey scroll aktif olduðunda sayfalama yapýlamaz 
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(f => f.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .Grouping(g => g.AutoExpandAll(false))
+        .RemoteOperations(true)
+        .Summary(s => s
+            .TotalItems(totalItems =>
+            {
+                totalItems.AddFor(m => m.ID).SummaryType(SummaryType.Count);
+            })
+            .GroupItems(groupItems =>
+            {
+                groupItems.Add().SummaryType(SummaryType.Count);
+            })
+        )
+        .Editing(editing =>
+        {
+            editing.AllowAdding(true);
+            editing.AllowDeleting(true);
+            editing.AllowUpdating(true);
+            editing.Mode(GridEditMode.Form);
+        })
+        .AllowColumnReordering(true)
+        .SearchPanel(s => s.Visible(true))
+        .ShowBorders(true)
+        .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Infinite)) // sonsuz yüklenen scrollY
+        .RowAlternationEnabled(true) // satýrlarýn gri-beyaz þeklinde gelmesi
+
+)
+    </div>
+<script>
+    function beforeSend(operation, ajaxSettings) {
+        var data = ajaxSettings.data || {},
+            args = Object.keys(data).map(function (key) {
+            return key + "=" + data[key];
+        }).join(" ");
+
+        var logList = $("#requests ul"),
+            time = DevExpress.localization.formatDate(new Date(), "HH:mm:ss"),
+            newItem = $("<li>").text([time, ajaxSettings.method, ajaxSettings.url, args].join(" "));
+
+        logList.prepend(newItem);
+    }
+</script>
+<style>
+    #grid {
+    height: 440px;
+}
+
+.options {
+    padding: 20px;
+    margin-top: 20px;
+    background-color: rgba(191, 191, 191, 0.15);
+}
+
+.caption {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.option {
+    margin-bottom: 10px;
+}
+
+.option > span {
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+}
+
+.option > .dx-widget {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#requests .caption {
+    float: left;
+    padding-top: 7px;
+}
+
+#requests > div {
+    padding-bottom: 5px;
+}
+
+    #requests > div:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+#requests #clear {
+    float: right;
+}
+
+#requests ul {
+    list-style: none;
+    max-height: 100px;
+    overflow: auto;
+    margin: 0;
+}
+
+#requests ul li {
+    padding: 7px 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+#requests ul li:last-child {
+    border-bottom: none;
+}
+#gridContainer {
+    height: 734px;
+}
+    .low.dx-radiobutton-checked .dx-radiobutton-icon .dx-radiobutton-icon-dot {
+    background: gray;
+}
+
+.normal.dx-radiobutton-checked .dx-radiobutton-icon .dx-radiobutton-icon-dot {
+    background: green;
+}
+
+.urgent.dx-radiobutton-checked .dx-radiobutton-icon .dx-radiobutton-icon-dot {
+    background: orange;
+}
+
+.high.dx-radiobutton-checked .dx-radiobutton-icon .dx-radiobutton-icon-dot {
+    background: red;
+}
+
+#radio-group-with-selection {
+    margin-bottom: 10px;
+}
+
+#tasks-list {
+    margin: 0 0 10px 10px;
+    white-space: normal;
+}
+
+#list {
+    margin: 10px 0 0 20px;
+    padding-left: 0;
+    text-align: left;
+}
+</style>
