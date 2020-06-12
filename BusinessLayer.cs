@@ -12,7 +12,7 @@ namespace NefaMVCWenAppDevEx.DataModels
 	public class BusinessLayer : IBusinessLayer<DataModel, int>
 	{
 		
-		SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-BM237L6;Initial Catalog=NEFA;Integrated Security=True");
+		SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-BM237L6;Initial Catalog=CARI;Integrated Security=True");
 		public bool Delete(int ID)
 		{
 			try
